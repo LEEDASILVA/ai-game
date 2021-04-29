@@ -12,11 +12,11 @@ const fillPop = (nbrPopulation, size) => {
 const mapValues = (target, targetMax) => ((target * 100) / targetMax) * 100
 
 const initPop = (phrase, mutation, nbrPopulation) => {
-    let population = fillPop(nbrPopulation, phrase.length)
+  let population = fillPop(nbrPopulation, phrase.length)
   let pop = {
     population,
     matingPool: [],
-    generation: 0,
+    generations: 0,
     finished: false,
     target: phrase,
     mutationRate: mutation,
@@ -62,7 +62,6 @@ const initPop = (phrase, mutation, nbrPopulation) => {
         this.population[i] = child
       }
       this.generations++
-      console.log(this.generation)
     },
 
     getBest() {
@@ -90,16 +89,21 @@ const initPop = (phrase, mutation, nbrPopulation) => {
     },
 
     getGeneration() {
-      return this.generation
+      return this.generations
     },
 
     getAverageFitness() {
-      sum = this.population.reduce((acc, cr) => acc + cr)
-      return sum / this.population.length
+      let result = 0
+      for (let i = 0; i < this.population.length; i++) {
+        result += this.population[i].fitness
+      }
+      return result / this.population.length
+      //       sum = this.population.reduce((acc, cr, i) => acc.fitness + cr.fitness)
+      //       return sum / this.population.length
     },
 
     allPhrases() {
-      let result=''
+      let result = ''
       let displayLimit = 30
       for (let i = 0; i < displayLimit; i++) {
         result += this.population[i].getPhrase() + '<br>'

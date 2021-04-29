@@ -93,7 +93,7 @@ let stats = document.getElementById('stats')
 let p = document.getElementById('best-phrase-input')
 
 const init = () => {
-    let phrase = 'To be or not to be.'
+    let phrase = 'Will you are will you not'
     p.innerHTML += phrase
 
     popmax = 200
@@ -101,7 +101,6 @@ const init = () => {
 
     // create population
     population = initPop(phrase, mutationRate, popmax)
-    console.log(population)
 }
 
 const draw = () => {
