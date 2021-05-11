@@ -27,6 +27,8 @@ const initDNA = (lengthPhrase) => {
         this.genes[i] == target.charAt(i) && score++
 
       this.fitness = score / target.length
+      
+      this.fitness = Math.pow(this.fitness, 4)
     },
     crossover(partner) {
       let child = initDNA(this.genes.lengthPhrase)
