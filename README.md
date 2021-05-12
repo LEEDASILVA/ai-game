@@ -4,6 +4,11 @@
 
 This folder has the examples of the algorithms that i'm using for the main project
 
+alg-examples:
+
+- [generation-alg](https://leedasilva.github.io/ai-game/alg-example/generation-alg/)
+- [neural-network](https://leedasilva.github.io/ai-game/alg-example/neural-network/)
+
 ## main project
 
 ### BOT
