@@ -2,6 +2,8 @@
 
 This folder has the examples of the algorithms that i'm using for the main project
 
+help given by : [coding challenge](https://www.youtube.com/channel/UCvjgXvBlbQiydffZU7m1_aw)
+
 ## genetic algorithm
 
 heredity:
