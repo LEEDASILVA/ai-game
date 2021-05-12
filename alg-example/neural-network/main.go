@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	"log"
 	"math/rand"
 	"os"
@@ -18,27 +19,23 @@ func random(min, max float64) float64 {
 }
 
 func drawCircles(dc *gg.Context) {
-	dc.DrawCircle(random(15.0, 25.0), random(15.0, 25.0), random(5.0, 10.0))
-	dc.SetRGB(0, 0, 0)
-	dc.Fill()
-}
-
-func drawRect(dc *gg.Context, point Point, size float64) {
-	dc.SetRGB(0, 0, 0)
-	dc.DrawLine(point.X, point.Y, point.X+size, point.Y)
-	dc.DrawLine(point.X, point.Y, point.X, point.Y+size)
-
-	dc.DrawLine(point.X+size, point.Y+size, point.X+size, point.Y)
-	dc.DrawLine(point.X+size, point.Y+size, point.X, point.Y+size)
-
+	dc.DrawCircle(random(64/3, 64-(64/3)), random(64/3, 64-(64/3)), random(10.0, 20.0))
+	dc.SetRGBA(0, 0, 0, 1)
+	dc.SetLineWidth(2)
 	dc.Stroke()
 }
 
-func drawTriangle(dc *gg.Context, point1, point2, point3 Point) {
-	dc.SetRGB(0, 0, 0)
-	dc.DrawLine(point1.X, point1.Y, point2.X, point2.Y)
-	dc.DrawLine(point1.X, point1.Y, point3.X, point3.Y)
-	dc.DrawLine(point2.X, point2.Y, point3.X, point3.Y)
+func drawRect(dc *gg.Context, point Point, size float64) {
+	dc.DrawRectangle(point.X, point.Y, size, size)
+	dc.SetRGBA(0, 0, 0, 1)
+	dc.SetLineWidth(2)
+	dc.Stroke()
+}
+
+func drawTriangle(dc *gg.Context, point Point, r, rotation float64) {
+	dc.DrawRegularPolygon(3, point.X, point.Y, r, rotation)
+	dc.SetRGBA(0, 0, 0, 1)
+	dc.SetLineWidth(2)
 	dc.Stroke()
 }
 
@@ -48,20 +45,26 @@ func main() {
 		log.Panic(err)
 	}
 
-	for i := 0; i < 100; i++ {
-		dc := gg.NewContext(64, 64)
+	for i := 1; i <= 200; i++ {
+		dc := gg.NewContextForRGBA(image.NewRGBA(image.Rect(0, 0, 64, 64)))
+		dc.SetRGB(1, 1, 1)
+		dc.Clear()
+
 		drawCircles(dc)
 		dc.SavePNG("./data/circle" + strconv.Itoa(i) + ".png")
 
-		dc = gg.NewContext(64, 64)
-		drawRect(dc, Point{random(5.0, 25.0), random(5.0, 25.0)}, random(5.0, 10.0))
+		dc = gg.NewContextForRGBA(image.NewRGBA(image.Rect(0, 0, 64, 64)))
+		dc.SetRGB(1, 1, 1)
+		dc.Clear()
+
+		drawRect(dc, Point{random(5, 30), random(5, 30)}, random(10.0, 30.0))
 		dc.SavePNG("./data/square" + strconv.Itoa(i) + ".png")
 
-		dc = gg.NewContext(64, 64)
-		drawTriangle(dc, Point{random(5.0, 25.0), random(5.0, 25.0)},
-			Point{random(5.0, 25.0), random(5.0, 25.0)},
-			Point{random(5.0, 25.0), random(5.0, 25.0)})
+		dc = gg.NewContextForRGBA(image.NewRGBA(image.Rect(0, 0, 64, 64)))
+		dc.SetRGB(1, 1, 1)
+		dc.Clear()
+
+		drawTriangle(dc, Point{64 / 2, 64 / 2}, random(10.0, 30.0), 0.0)
 		dc.SavePNG("./data/triangle" + strconv.Itoa(i) + ".png")
 	}
-
 }

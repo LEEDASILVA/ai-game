@@ -1,9 +1,8 @@
-
-## Example folder
+# Example folder
 
 This folder has the examples of the algorithms that i'm using for the main project
 
-- genetic algorithm:
+## genetic algorithm
 
 heredity:
     there must be a process in place by which children receive the properties
@@ -84,3 +83,29 @@ result -> somebody
 if there is no variation you can apply mutation, in the child creation i can mutate one of the characters of the child
 
 ---
+
+## Neural Network
+
+The first project will contain a neural network that tries to guess the shape that you draw to the canvas
+
+1. generate the data:
+
+- `go run main.go`, this will create a folder named `data` with all the train data, it will include 3 shapes
+  - circles
+  - squares
+  - triangles
+- the it will generate 600 images 64*64 px
+- each 200 of each
+
+2. train the neural network, for this we will use the ml5 to create a image regression neural network, `sketch-model.js`
+
+- inputs will be the width, height and the `RGBA`
+- the epochs will be set to 70 this meaning that it will train 70 times
+
+to run the training you must change the script of the html file to `sketch-model.js`
+
+```js
+    <script src="sketch-model.js"></script>
+```
+
+3. run the testing part for this you can open the `index.html` and try to draw the shape you want and the neural network will try to guess the shape
